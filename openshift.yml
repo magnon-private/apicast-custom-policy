@@ -27,8 +27,8 @@ objects:
         name: apicast-policy:example
     source:
       git:
-        uri: https://github.com/cluedit/custom-policy-for-jwt-authentication.git
-        ref: 'master'
+        uri: https://github.com/magnon-private/apicast-custom-policy.git
+        ref: main
       type: Git
     strategy:
       type: Source
@@ -87,3 +87,4 @@ parameters:
 - name: AMP_RELEASE
   required: true
   description: AMP Version (eg. 2.2.0-GA)
+
