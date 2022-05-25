@@ -51,6 +51,23 @@
             "type": "boolean",
             "description": "preflight (HTTP OPTIONS request)",
             "default": false
+          },
+          "claims_to_verify": {
+            "type": "array",
+            "description": "claims to verify",
+            "items": {
+              "type": "string",
+              "oneOf": [
+                {
+                  "enum": ["exp"],
+                  "title": "exp"
+                },
+                {
+                  "enum": ["nbf"],
+                  "title": "nbf"
+                }
+              ]
+            }
           }
         }
       },

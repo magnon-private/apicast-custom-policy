@@ -71,19 +71,23 @@ local function decode_token(token)
     return json.decode(base64_decode(header_64)), json.decode(base64_decode(claims_64)), base64_decode(signature_64)
   end)
   if not ok then
-    return nil, "invalid JSON"
+    -- return nil, "invalid JSON"
+    return nil, "4"
   end
 
   if not header.alg or type(header.alg) ~= "string" or not alg_verify[header.alg] then
-    return nil, "invalid alg"
+    -- return nil, "invalid alg"
+    return nil, "5"
   end
 
   if not claims then
-    return nil, "invalid claims"
+    -- return nil, "invalid claims"
+    return nil, "6"
   end
 
   if not signature then
-    return nil, "invalid signature"
+    -- return nil, "invalid signature"
+    return nil, "7"
   end
 
   return {
@@ -190,7 +194,8 @@ local registered_claims = {
     type = "number",
     check = function(nbf)
       if nbf > time() then
-        return "token not valid yet"
+        -- return "token not valid yet"
+        return "ER012"
       end
     end
   },
@@ -198,7 +203,8 @@ local registered_claims = {
     type = "number",
     check = function(exp)
       if exp <= time() then
-        return "token expired"
+        -- return "token expired"
+        return "ER013"
       end
     end
   }
@@ -218,8 +224,8 @@ function _M:verify_registered_claims(claims_to_verify)
     claim_rules = registered_claims[claim_name]
 
     if type(claim) ~= claim_rules.type then
-      errors = add_error(errors, claim_name, "must be a " .. claim_rules.type)
-
+      -- errors = add_error(errors, claim_name, "must be a " .. claim_rules.type)
+      errors = add_error(errors, claim_name, "ER004")
     else
       local check_err = claim_rules.check(claim)
       if check_err then
@@ -238,7 +244,8 @@ function _M:check_maximum_expiration(maximum_expiration)
 
   local exp = self.claims.exp
   if exp == nil or exp - time() > maximum_expiration then
-    return false, { exp = "exceeds maximum allowed expiration" }
+    -- return false, { exp = "exceeds maximum allowed expiration" }
+    return false, { exp = "ER011" }
   end
 
   return true

@@ -2,6 +2,7 @@ version: '3'
 
 services:
   openresty:
+    container_name: openresty-for-tests
     build: .
     ports:
       - '3000:3000'

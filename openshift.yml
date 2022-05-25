@@ -27,8 +27,8 @@ objects:
         name: apicast-policy:example
     source:
       git:
-        uri: https://github.com/magnon-private/apicast-custom-policy.git
-        ref: main
+        uri: https://github.com/cluedit/custom-policy-for-jwt-authentication.git
+        ref: 'master'
       type: Git
     strategy:
       type: Source
@@ -50,12 +50,12 @@ objects:
       to:
         kind: ImageStreamTag
         name: 'amp-apicast:latest'
-    postCommit:
-      args:
-        - '--test'
-        - '--lazy'
-      command:
-        - bin/apicast
+    # postCommit:
+    #   args:
+    #     - '--test'
+    #     - '--lazy'
+    #   command:
+    #     - bin/apicast
     resources: {}
     runPolicy: Serial
     source:
@@ -87,4 +87,3 @@ parameters:
 - name: AMP_RELEASE
   required: true
   description: AMP Version (eg. 2.2.0-GA)
-
