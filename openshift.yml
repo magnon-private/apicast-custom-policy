@@ -27,7 +27,7 @@ objects:
         name: apicast-policy:example
     source:
       git:
-        uri: https://github.com/cluedit/custom-policy-for-jwt-authentication.git
+        uri: https://github.com/magnon-private/apicast-custom-policy.git
         ref: 'master'
       type: Git
     strategy:
